@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Racuni.Dto;
 using Racuni.Interfaces;
 using Racuni.Models;
 
@@ -9,17 +11,19 @@ namespace Racuni.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountRepository _accountRepository;
+        private readonly IMapper _mapper;
 
-        public AccountController(IAccountRepository accountRepository)
+        public AccountController(IAccountRepository accountRepository, IMapper mapper)
         {
             _accountRepository = accountRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<AccountHeader>))]
         public IActionResult GetAccounts()
         {
-            var accounts = _accountRepository.GetAccounts();
+            var accounts = _mapper.Map<List<AccountHeaderDto>>(_accountRepository.GetAccounts());
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -37,7 +41,7 @@ namespace Racuni.Controllers
                 return NotFound();
             }
 
-            var account = _accountRepository.GetAccountByInvoiceNumber(invoiceNumber);
+            var account = _mapper.Map<AccountHeaderDto>(_accountRepository.GetAccountByInvoiceNumber(invoiceNumber));
 
             if (!ModelState.IsValid)
             {
