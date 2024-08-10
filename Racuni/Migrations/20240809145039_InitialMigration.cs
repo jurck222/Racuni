@@ -7,13 +7,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Racuni.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AccountHeaders",
+                name: "InvoiceHeaders",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -26,7 +26,7 @@ namespace Racuni.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AccountHeaders", x => x.Id);
+                    table.PrimaryKey("PK_InvoiceHeaders", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -38,22 +38,22 @@ namespace Racuni.Migrations
                     ItemName = table.Column<string>(type: "text", nullable: false),
                     Quantity = table.Column<int>(type: "integer", nullable: false),
                     Price = table.Column<double>(type: "double precision", nullable: false),
-                    AccountHeaderId = table.Column<int>(type: "integer", nullable: true)
+                    InvoicesHeaderId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_InvoiceItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InvoiceItems_AccountHeaders_AccountHeaderId",
-                        column: x => x.AccountHeaderId,
-                        principalTable: "AccountHeaders",
+                        name: "FK_InvoiceItems_InvoiceHeaders_InvoicesHeaderId",
+                        column: x => x.InvoicesHeaderId,
+                        principalTable: "InvoiceHeaders",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_InvoiceItems_AccountHeaderId",
+                name: "IX_InvoiceItems_InvoicesHeaderId",
                 table: "InvoiceItems",
-                column: "AccountHeaderId");
+                column: "InvoicesHeaderId");
         }
 
         /// <inheritdoc />
@@ -63,7 +63,7 @@ namespace Racuni.Migrations
                 name: "InvoiceItems");
 
             migrationBuilder.DropTable(
-                name: "AccountHeaders");
+                name: "InvoiceHeaders");
         }
     }
 }

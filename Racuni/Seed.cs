@@ -12,11 +12,11 @@ namespace Racuni
         }
         public void SeedDataContext()
         {
-            if (!dataContext.AccountHeaders.Any())
+            if (!dataContext.InvoiceHeaders.Any())
             {
-                var invoices = new List<AccountHeader>()
+                var invoices = new List<InvoicesHeader>()
                 {
-                    new AccountHeader()
+                    new InvoicesHeader()
                     {
                         InvoiceNumber = 245646,
                         CreatedAt = new DateTime(2024, 8, 7, 14, 32, 0, DateTimeKind.Utc),
@@ -48,7 +48,7 @@ namespace Racuni
                         }
                     },
 
-                    new AccountHeader()
+                    new InvoicesHeader()
                     {
                         InvoiceNumber = 231324,
                         CreatedAt = new DateTime(2024, 9, 7, 12, 30, 5, DateTimeKind.Utc),
@@ -81,7 +81,7 @@ namespace Racuni
                     }
                 };
 
-                dataContext.AccountHeaders.AddRange(invoices);
+                dataContext.InvoiceHeaders.AddRange(invoices);
                 dataContext.SaveChanges();
             }
         }

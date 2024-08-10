@@ -10,7 +10,7 @@ namespace Racuni.Data
 
         }
 
-        public DbSet<AccountHeader> AccountHeaders { get; set; }
+        public DbSet<InvoicesHeader> InvoiceHeaders { get; set; }
         public DbSet<InvoiceItem> InvoiceItems { get; set; }
 
 

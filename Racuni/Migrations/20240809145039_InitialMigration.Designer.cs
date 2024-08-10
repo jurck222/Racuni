@@ -12,8 +12,8 @@ using Racuni.Data;
 namespace Racuni.Migrations
 {
     [DbContext(typeof(InvoiceDbContext))]
-    [Migration("20240807174350_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240809145039_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,35 @@ namespace Racuni.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Racuni.Models.AccountHeader", b =>
+            modelBuilder.Entity("Racuni.Models.InvoiceItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("InvoicesHeaderId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ItemName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvoicesHeaderId");
+
+                    b.ToTable("InvoiceItems");
+                });
+
+            modelBuilder.Entity("Racuni.Models.InvoicesHeader", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -53,45 +81,17 @@ namespace Racuni.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AccountHeaders");
+                    b.ToTable("InvoiceHeaders");
                 });
 
             modelBuilder.Entity("Racuni.Models.InvoiceItem", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AccountHeaderId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ItemName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("double precision");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountHeaderId");
-
-                    b.ToTable("InvoiceItems");
-                });
-
-            modelBuilder.Entity("Racuni.Models.InvoiceItem", b =>
-                {
-                    b.HasOne("Racuni.Models.AccountHeader", null)
+                    b.HasOne("Racuni.Models.InvoicesHeader", null)
                         .WithMany("InvoiceItems")
-                        .HasForeignKey("AccountHeaderId");
+                        .HasForeignKey("InvoicesHeaderId");
                 });
 
-            modelBuilder.Entity("Racuni.Models.AccountHeader", b =>
+            modelBuilder.Entity("Racuni.Models.InvoicesHeader", b =>
                 {
                     b.Navigation("InvoiceItems");
                 });
