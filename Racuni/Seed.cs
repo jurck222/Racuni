@@ -20,6 +20,7 @@ namespace Racuni
                     {
                         InvoiceNumber = 245646,
                         CreatedAt = new DateTime(2024, 8, 7, 14, 32, 0, DateTimeKind.Utc),
+                        ExpiresAt = new DateTime(2024, 9, 7, 14, 32, 0, DateTimeKind.Utc),
                         Recipient = "Jure Pavlovič",
                         Address = "Svetčeva Ulica 9",
                         City = "1000 Ljubljana",
@@ -52,6 +53,7 @@ namespace Racuni
                     {
                         InvoiceNumber = 231324,
                         CreatedAt = new DateTime(2024, 9, 7, 12, 30, 5, DateTimeKind.Utc),
+                        ExpiresAt = new DateTime(2024, 10, 7, 12, 30, 5, DateTimeKind.Utc),
                         Recipient = "Jože Neznani",
                         Address = "Večna pot 113",
                         City = "1000 Ljubljana",
@@ -78,7 +80,33 @@ namespace Racuni
                                 Price = 12.75,
                             },
                         }
-                    }
+                    },
+
+                    new InvoicesHeader()
+                    {
+                        InvoiceNumber = 245646,
+                        CreatedAt = new DateTime(2024, 8, 7, 14, 32, 0, DateTimeKind.Utc),
+                        ExpiresAt = new DateTime(2024, 9, 7, 14, 32, 0, DateTimeKind.Utc),
+                        Recipient = "Stane Vidmar",
+                        Address = "Neznana Pot 13",
+                        City = "0000 Neznano",
+                        InvoiceItems = new List<InvoiceItem>()
+                        {
+                            new InvoiceItem()
+                            {
+                                ItemName = "TV - JAVNA RABA - PAVŠAL",
+                                Quantity = 4,
+                                Price = 12.75,
+                            },
+
+                            new InvoiceItem()
+                            {
+                                ItemName = "TV - ZASEBNA RABA - PRAVNA OSEBA",
+                                Quantity = 10,
+                                Price = 12.75,
+                            },
+                        }
+                    },
                 };
 
                 dataContext.InvoiceHeaders.AddRange(invoices);
