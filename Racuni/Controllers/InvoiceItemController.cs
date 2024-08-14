@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Racuni.Interfaces;
+using Racuni.Models;
 
 namespace Racuni.Controllers
 {
@@ -37,6 +38,29 @@ namespace Racuni.Controllers
             }
 
             return Ok("Invoice item successfully deleted");
+        }
+
+        [HttpPost("{invoiceId}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(400)]
+        public IActionResult AddInvoiceItem(int invoiceId, [FromBody] InvoiceItem item)
+        {
+            if (item == null)
+            {
+                return BadRequest("Invoice item is null.");
+            }
+
+            var success = _invoiceItemRepository.AddInvoiceItem(invoiceId, item);
+
+            if (success)
+            {
+                return Ok("Invoice item added successfully.");
+            }
+            else
+            {
+                return NotFound("Invoice header not found.");
+            }
         }
     }
 }

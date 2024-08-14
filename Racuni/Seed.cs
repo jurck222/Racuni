@@ -84,9 +84,9 @@ namespace Racuni
 
                     new InvoicesHeader()
                     {
-                        InvoiceNumber = 245646,
-                        CreatedAt = new DateTime(2024, 8, 7, 14, 32, 0, DateTimeKind.Utc),
-                        ExpiresAt = new DateTime(2024, 9, 7, 14, 32, 0, DateTimeKind.Utc),
+                        InvoiceNumber = 245678,
+                        CreatedAt = new DateTime(2024, 6, 7, 14, 32, 0, DateTimeKind.Utc),
+                        ExpiresAt = new DateTime(2024, 7, 7, 14, 32, 0, DateTimeKind.Utc),
                         Recipient = "Stane Vidmar",
                         Address = "Neznana Pot 13",
                         City = "0000 Neznano",

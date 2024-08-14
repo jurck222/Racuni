@@ -1,4 +1,5 @@
-﻿using Racuni.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Racuni.Data;
 using Racuni.Interfaces;
 using Racuni.Models;
 
@@ -28,6 +29,22 @@ namespace Racuni.Repository
             _context.InvoiceItems.Remove(item);
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
+        }
+
+        bool IInvoiceItemRepository.AddInvoiceItem(int invoiceHeaderId, InvoiceItem item)
+        {
+            var invoiceHeader = _context.InvoiceHeaders.Include(invoice => invoice.InvoiceItems).FirstOrDefault(invoice => invoice.Id == invoiceHeaderId);
+
+
+            if (invoiceHeader == null)
+            {
+                return false;
+            }
+
+            invoiceHeader.InvoiceItems.Add(item);
+
+            var saved = _context.SaveChanges();
+            return saved > 0;
         }
     }
 }

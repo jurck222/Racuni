@@ -7,5 +7,6 @@ namespace Racuni.Interfaces
         InvoiceItem GetInvoiceItemById(int itemId);
         bool InvoiceItemExists(int itemId);
         bool DeleteInvoiceItem(InvoiceItem item);
+        bool AddInvoiceItem(int invoiceId, InvoiceItem item);
     }
 }
