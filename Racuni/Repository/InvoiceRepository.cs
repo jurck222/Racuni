@@ -16,7 +16,7 @@ namespace Racuni.Repository
 
         public ICollection<InvoicesHeader> GetInvoices()
         {
-            return _context.InvoiceHeaders.Include(invoice => invoice.InvoiceItems).OrderBy(invoice => invoice.Id).ToList();         //OrderBy(invoice => invoice.Id).ToList();
+            return _context.InvoiceHeaders.Include(invoice => invoice.InvoiceItems).OrderBy(invoice => invoice.Id).ToList();
         }
 
         bool IInvoiceRepository.InvoiceExists(int invoiceNumber)
