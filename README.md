@@ -54,7 +54,7 @@ A simple .NET application for managing invoices and invoice items. This applicat
    To run the application with debugging, you can use the following command:
 
    ```bash
-   dotnet watch run --project Racuni/Racuni.csprojj
+   dotnet watch run --project Racuni/Racuni.csproj
    ```
 
    This command will watch for file changes and restart the application and open swagger OpenApi documentation for the api, which is useful during development.
