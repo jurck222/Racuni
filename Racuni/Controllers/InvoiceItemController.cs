@@ -18,7 +18,8 @@ namespace Racuni.Controllers
         [HttpDelete("{itemId}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult DeleteInvoice(int itemId)
+        [ProducesResponseType(500)]
+        public IActionResult DeleteInvoiceItem(int itemId)
         {
             if (!_invoiceItemRepository.InvoiceItemExists(itemId))
             {
@@ -34,7 +35,7 @@ namespace Racuni.Controllers
 
             if (!_invoiceItemRepository.DeleteInvoiceItem(item))
             {
-                ModelState.AddModelError("", "Something went wrong when deleting the invoice item");
+                return StatusCode(500, "Something went wrong when deleting the invoice item");
             }
 
             return Ok("Invoice item successfully deleted");

@@ -1,6 +1,0 @@
-@Racuni_HostAddress = http://localhost:5095
-
-GET {{Racuni_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
