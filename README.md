@@ -58,3 +58,27 @@ A simple .NET application for managing invoices and invoice items. This applicat
    ```
 
    This command will watch for file changes and restart the application and open swagger OpenApi documentation for the api, which is useful during development.
+   
+### Database setup
+   - The app uses a PostgreSQL database for data storage so you have to install [PostgreSQL](https://www.postgresql.org/download/windows/) server on your local machine. I would also recommend using a gui client like [PgAdmin](https://www.pgadmin.org/download/).
+   - Add a database called invoices through a gui client of your choice or by running the following sql query:
+      ```sql
+      CREATE DATABASE invoices
+          WITH
+          OWNER = "user"
+          ENCODING = 'UTF8'
+          LOCALE_PROVIDER = 'libc'
+          CONNECTION LIMIT = -1
+          IS_TEMPLATE = False;
+      ```
+   - Apply migrations in VisualStudio PackageManagerConsole with `Update-Database` command or by running the following command in terminal:
+      ```bash
+      dotnet ef database update
+      ```
+   - To seed the data for testing purposes use:
+     ```bash
+     dotnet run seeddata
+     ```
+### :warning:Disclaimer
+The connection string in the app is set to `localhost` with `port 5434` using a user with `username=user` and `password=user`, and points to a database called `invoices`. If you want to change any of these options you can edit the DefaultConnection in `appsettings.json` file.
+     
